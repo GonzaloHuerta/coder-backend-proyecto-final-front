@@ -8,18 +8,26 @@ import FormHelperText from "@mui/material/FormHelperText";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import Alert  from "@mui/material/Alert";
 import axios from "axios";
+import {useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const Register = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL_API;
   const PATH = "/register";
   const [form, setForm] = useState({
+    nombre: "",
+    apellido: "",
     email: "",
     password: "",
   });
   const [confirmPassword, setConfirmPassword] = useState({
     confirmPassword: "",
   });
+  const [successRegister, setSuccessRegister] = useState(false);
+
+  const navigate = useNavigate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -28,15 +36,27 @@ const Register = () => {
     console.log(confirmPassword.confirmPassword);
     if (form.password != confirmPassword.confirmPassword) {
       console.log("password not equal to confirm password");
-
       alert("Las contraseñas no coinciden");
-    } else {
+    } 
+    else {
       console.log("form", form);
       console.log(`${BASE_URL}${PATH}`)
       axios
         .post(`${BASE_URL}${PATH}`, form)
         .then(function (response) {
           console.log(response);
+          /* navigate('/login') */
+          setSuccessRegister(true);
+          setForm({
+            nombre: "",
+            apellido: "",
+            email: "",
+            password: ""
+          })
+          setConfirmPassword({
+            confirmPassword: ""
+          })
+        
         })
         .catch(function (error) {
           console.log(error);
@@ -49,7 +69,7 @@ const Register = () => {
       <CssBaseline />
       <Container
         maxWidth="sm"
-        sx={{ bgcolor: "#cfe8fc", padding: "50px", minHeight: "800px" }}
+        sx={{ bgcolor: "#ffffff", padding: "50px", marginTop: "40px", marginBottom: "40px" }}
       >
         <Typography
           variant="h5"
@@ -59,9 +79,10 @@ const Register = () => {
         >
           Nuevo usuario
         </Typography>
+        {successRegister ? <Alert severity="info">Usuario registrado correctamente</Alert> : null}
         <Grid container spacing={2} justifyContent="space-between">
           <Grid item>
-{/*             <FormControl sx={{ m: 1, width: "230px", marginBottom: "20px" }}>
+            <FormControl sx={{ m: 1, width: "230px", marginBottom: "20px" }}>
               <InputLabel htmlFor="my-input">Nombre</InputLabel>
               <Input
                 id="nombre"
@@ -70,10 +91,10 @@ const Register = () => {
                 onChange={(e) => setForm({ ...form, nombre: e.target.value })}
                 aria-describedby="my-helper-text"
               />
-            </FormControl> */}
+            </FormControl>
           </Grid>
           <Grid item>
-            {/* <FormControl sx={{ m: 1, width: "230px", marginBottom: "20px" }}>
+            <FormControl sx={{ m: 1, width: "230px", marginBottom: "20px" }}>
               <InputLabel htmlFor="my-input">Apellido</InputLabel>
               <Input
                 id="apellido"
@@ -82,7 +103,7 @@ const Register = () => {
                 onChange={(e) => setForm({ ...form, apellido: e.target.value })}
                 aria-describedby="my-helper-text"
               />
-            </FormControl> */}
+            </FormControl>
           </Grid>
         </Grid>
         <Grid container spacing={2} justifyContent="">
@@ -108,6 +129,7 @@ const Register = () => {
               <InputLabel htmlFor="my-input">Nueva Contraseña</InputLabel>
               <Input
                 id="my-input"
+                type="password"
                 name="password"
                 value={form.password}
                 onChange={(e) => setForm({ ...form, password: e.target.value })}
@@ -120,6 +142,7 @@ const Register = () => {
               <InputLabel htmlFor="my-input">Repita Contraseña</InputLabel>
               <Input
                 id="my-input"
+                type="password"
                 name="confirmPassword"
                 value={confirmPassword.confirmPassword}
                 onChange={(e) =>
@@ -136,7 +159,7 @@ const Register = () => {
         <Grid container spacing={2} justifyContent="flex-end">
           <Grid>
             <Button
-              sx={{ marginTop: "100px" }}
+              sx={{ marginTop: "50px" }}
               variant="outlined"
               onClick={onSubmit}
             >
@@ -146,8 +169,13 @@ const Register = () => {
         </Grid>
         <Grid container spacing={2} justifyContent="flex-end">
           <Grid item>
-            <Button size="small" sx={{ marginTop: "100px" }} color="secondary">
-              Ir a Login
+            <Button 
+              size="small" 
+              sx={{ marginTop: "30px" }}
+              variant="outlined"
+              color="secondary"
+              id="btn-go-to-login">
+                <Link to='/login'>Ir a Login</Link>
             </Button>
           </Grid>
         </Grid>

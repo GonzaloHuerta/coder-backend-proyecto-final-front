@@ -64,7 +64,8 @@ const Header = () => {
                 </Grid>
                 <Grid container spacing={2}  
                   direction="row"
-                  alignItems="center">
+                  alignItems="center"
+                  id="navbar">
                     <Grid item sx={ { cursor: 'pointer' } }>
                         <Link to='/'>Home</Link>
                     </Grid>
@@ -72,8 +73,12 @@ const Header = () => {
                         <Link to='/login'>Login</Link>
                     </Grid>
                     <Grid item sx={ { cursor: 'pointer' } }>
+                        <Link to='/register'>Register</Link>
+                    </Grid>
+                    <Grid item sx={ { cursor: 'pointer' } }>
                         <span onClick={handleLogout}>Logout</span>
                     </Grid>
+                    
                   </Grid>
                 <Grid container spacing={2} 
                   direction="row"

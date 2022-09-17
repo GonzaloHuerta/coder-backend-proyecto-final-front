@@ -5,9 +5,11 @@ import FormControl from "@mui/material/FormControl";
 import Input from "@mui/material/Input";
 import InputLabel from "@mui/material/InputLabel";
 import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
 import {useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const Login = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL_API;
@@ -36,8 +38,16 @@ const Login = () => {
       <CssBaseline />
       <Container
         maxWidth="sm"
-        sx={{ bgcolor: "#cfe8fc", padding: "50px", minHeight: "800px" }}
+        sx={{ bgcolor: "#ffffff", padding: "50px", marginTop: "40px", marginBottom: "40px" }}
       >
+        <Typography
+          variant="h5"
+          gutterBottom
+          component="div"
+          sx={{ marginBottom: "50px" }}
+        >
+          Iniciar sesión
+        </Typography>
         <Grid container spacing={2} justifyContent="">
           <Grid item>
             <FormControl sx={{ m: 1, width: "350px", marginBottom: "20px" }}>
@@ -71,7 +81,7 @@ const Login = () => {
         <Grid container spacing={2} justifyContent="flex-end">
           <Grid item>
             <Button
-              sx={{ marginTop: "100px" }}
+              sx={{ marginTop: "50px" }}
               variant="outlined"
               onClick={onSubmit}
             >
@@ -81,8 +91,13 @@ const Login = () => {
         </Grid>
         <Grid container spacing={2} justifyContent="flex-end">
           <Grid item>
-            <Button size="small" sx={{ marginTop: "100px" }} color="secondary">
-              Quiero Registrarme
+            <Button 
+              size="small" 
+              sx={{ marginTop: "30px" }}
+              variant="outlined" 
+              color="secondary"
+              id="btn-go-to-register">
+                <Link to='/register'>Quiero Registrarme</Link>
             </Button>
           </Grid>
         </Grid>

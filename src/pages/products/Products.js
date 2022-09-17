@@ -12,7 +12,7 @@ const Products = () => {
   const PATH = "/products";
   const [resultados, setResultados] = useState([]);
   const navigate = useNavigate();
-  
+
   console.log(`${BASE_URL}${PATH}`);
   useEffect(() => {
     axios

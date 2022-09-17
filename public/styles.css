@@ -1,3 +1,14 @@
 .MuiCard-root{
     margin: 0 auto;
 }
+
+#btn-go-to-login a,
+#btn-go-to-register a{
+    color: #4caf50;
+    text-decoration: none;
+}
+
+#navbar a{
+    color: #ffffff;
+    text-decoration: none;
+}

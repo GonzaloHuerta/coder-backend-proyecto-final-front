@@ -26,7 +26,7 @@ const theme = createTheme({
         img: {
           width: "100%",
         },
-        a: {
+        header: {
           color: '#ffffff',
           textDecoration: 'none'
         }
