@@ -12,13 +12,10 @@ import axios from "axios";
 
 const Register = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL_API;
-  const PATH = "/registro";
+  const PATH = "/register";
   const [form, setForm] = useState({
-    nombre: "",
-    apellido: "",
     email: "",
     password: "",
-    imagen: "",
   });
   const [confirmPassword, setConfirmPassword] = useState({
     confirmPassword: "",
@@ -35,6 +32,7 @@ const Register = () => {
       alert("Las contraseñas no coinciden");
     } else {
       console.log("form", form);
+      console.log(`${BASE_URL}${PATH}`)
       axios
         .post(`${BASE_URL}${PATH}`, form)
         .then(function (response) {
@@ -63,7 +61,7 @@ const Register = () => {
         </Typography>
         <Grid container spacing={2} justifyContent="space-between">
           <Grid item>
-            <FormControl sx={{ m: 1, width: "230px", marginBottom: "20px" }}>
+{/*             <FormControl sx={{ m: 1, width: "230px", marginBottom: "20px" }}>
               <InputLabel htmlFor="my-input">Nombre</InputLabel>
               <Input
                 id="nombre"
@@ -72,10 +70,10 @@ const Register = () => {
                 onChange={(e) => setForm({ ...form, nombre: e.target.value })}
                 aria-describedby="my-helper-text"
               />
-            </FormControl>
+            </FormControl> */}
           </Grid>
           <Grid item>
-            <FormControl sx={{ m: 1, width: "230px", marginBottom: "20px" }}>
+            {/* <FormControl sx={{ m: 1, width: "230px", marginBottom: "20px" }}>
               <InputLabel htmlFor="my-input">Apellido</InputLabel>
               <Input
                 id="apellido"
@@ -84,7 +82,7 @@ const Register = () => {
                 onChange={(e) => setForm({ ...form, apellido: e.target.value })}
                 aria-describedby="my-helper-text"
               />
-            </FormControl>
+            </FormControl> */}
           </Grid>
         </Grid>
         <Grid container spacing={2} justifyContent="">

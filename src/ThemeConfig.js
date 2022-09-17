@@ -1,10 +1,10 @@
 import { createTheme } from '@mui/material/styles';
-import { green, purple } from '@mui/material/colors';
+import { green, purple, blue } from '@mui/material/colors';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: purple[500],
+      main: blue[500],
     },
     secondary: {
       main: green[500],
@@ -25,6 +25,10 @@ const theme = createTheme({
         },
         img: {
           width: "100%",
+        },
+        a: {
+          color: '#ffffff',
+          textDecoration: 'none'
         }
       }
     }

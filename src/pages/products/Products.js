@@ -5,12 +5,15 @@ import ProductCard from "../../components/productCard/ProductCard";
 import PromoSlider from "../../components/promoSlider/PromoSlider";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
+import {useNavigate} from 'react-router-dom';
 
 const Products = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL_API;
-  const PATH = "/productos";
+  const PATH = "/products";
   const [resultados, setResultados] = useState([]);
-  console.log(BASE_URL);
+  const navigate = useNavigate();
+  
+  console.log(`${BASE_URL}${PATH}`);
   useEffect(() => {
     axios
       .get(`${BASE_URL}${PATH}`)
@@ -22,6 +25,7 @@ const Products = () => {
       .catch(function (error) {
         // handle error
         console.log(error);
+        navigate('/login')
       })
       .then(function () {
         // always executed

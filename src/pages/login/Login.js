@@ -7,6 +7,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
+import {useNavigate} from 'react-router-dom';
 
 const Login = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL_API;
@@ -15,6 +16,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
