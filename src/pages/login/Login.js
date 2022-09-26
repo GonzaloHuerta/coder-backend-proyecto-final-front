@@ -10,14 +10,19 @@ import Grid from "@mui/material/Grid";
 import axios from "axios";
 import {useNavigate} from 'react-router-dom';
 import {Link} from 'react-router-dom';
+import ErrorAlert from "../../components/alerts/Error";
 
 const Login = () => {
+  axios.defaults.withCredentials = true;
   const BASE_URL = process.env.REACT_APP_BASE_URL_API;
   const PATH = "/login";
+
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
+
+  const [errorLogin, setErrorLogin] = useState(false);
   const navigate = useNavigate();
 
   const onSubmit = async (e) => {
@@ -27,8 +32,11 @@ const Login = () => {
       .post(`${BASE_URL}${PATH}`, form)
       .then(function (response) {
         console.log(response);
+        setErrorLogin(false);
+        navigate('/')
       })
       .catch(function (error) {
+        setErrorLogin(true);
         console.log(error);
       });
   };
@@ -48,7 +56,8 @@ const Login = () => {
         >
           Iniciar sesión
         </Typography>
-        <Grid container spacing={2} justifyContent="">
+        {errorLogin ? <ErrorAlert>Error en el login. Intente nuevamente</ErrorAlert> : null}
+        <Grid container spacing={2} justifyContent=""  sx={{ marginTop: 2 }}>
           <Grid item>
             <FormControl sx={{ m: 1, width: "350px", marginBottom: "20px" }}>
               <InputLabel htmlFor="my-input">Email</InputLabel>

@@ -15,7 +15,31 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Chat from "./pages/chat/Chat";
 import Admin from "./pages/userAdmin/Admin";
+import Cart from './pages/cart/Cart';
 import CssBaseline from '@mui/material/CssBaseline';
+import axios from "axios";
+
+let isLogged = false;
+let userData;
+const BASE_URL = process.env.REACT_APP_BASE_URL_API;
+const PATH = "/session";
+
+//GET SESSION USER ID
+axios
+.get(`${BASE_URL}${PATH}`)
+.then(function (response) {
+  isLogged = true;
+  userData = response;
+})
+.catch(function (error) {
+  isLogged = false;
+  console.log(error);
+})
+.then(function () {
+    // always executed
+});
+
+
 
 ReactDOM.render(
   <React.StrictMode>
@@ -24,11 +48,12 @@ ReactDOM.render(
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/" element={<Products />} />
+          <Route path="/" element={<Products isLogged={isLogged} />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
         <Footer />
